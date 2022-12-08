@@ -1,0 +1,79 @@
+<hr><br>
+<meta charset = 'UTF-8'>
+
+<script>
+var Tamanho = ['PP','P','M','G','GG'];
+var Modelo = ['1','2','3','4','5','6','7','8','9','10'];
+var posicao = 0;
+var posicao2 = 0;
+var soma = 0;
+var Armario = new Array (5);
+var T, M;
+
+//Criação da Matriz
+for (T = 0; T < 5; T++) {
+    Armario[T] = new Array (10);
+    for (M = 0; M < 10; M++) {
+        Armario[T][M] = parseInt(Math.random()*50);
+    }
+}
+document.write(' &nbsp&nbsp&nbsp&nbsp&nbsp ');
+
+//Apresentação da Matriz
+for (M = 1; M <= 10; M++) {
+    document.write('M'+M+' | ');
+}
+document.write('<br><hr>');
+
+for (T = 0; T < 5; T++) {
+    document.write(Tamanho[T]+':'+' &nbsp ');
+    for (M = 0; M < 10; M++) {
+        document.write(Armario[T][M]+' &nbsp&nbsp&nbsp ');
+    }
+    document.write('<br><br>');
+}
+
+//Apresentação da matriz: Modelo e quantidade de cada tamanho.
+var TotalM = new Array (10);
+for (T = 0; T < 10; T++) {
+    posicao = 0;
+    sum = 0;
+    for (M = 0; M < 5; M++) {
+        sum += Armario[M][T]
+        document.write('No modelo '+Modelo[T]+' temos '+Armario[M][T]+' roupas no tamanho '+Tamanho[posicao]+'<br>');
+        posicao++;
+    }
+    document.write('<hr>');
+    TotalM[T] = sum;
+}
+document.write('<br><br>');
+
+//Modelo com MENOR quantidade de peças e TOTAL de peças de cada modelo.
+var Menor = TotalM[0];
+posicao = 0;
+M = 0;
+for (M = 0; M < 10; M++) {
+    if (Menor > TotalM[M]) {
+        Menor = TotalM[M];
+        posicao = M;
+    }
+}
+for (M = 0; M < 10; M++) {
+    document.write('No modelo '+Modelo[M]+' temos um <b>total</b> de '+TotalM[M]+' peças.'+'<br>');
+}
+document.write('<hr>');
+document.write('O modelo com <b>menor</b> quantidade é o modelo '+Modelo[posicao]+' com '+Menor+' peças.'+'<br><hr>');
+
+//Modelo que tem maior quantidade de peças em um tamanho específico.
+var Maior = 0;
+for (T = 0; T < 5; T++) {
+    for (M = 0; M < 10; M++) {
+        if (Maior < Armario[T][M]) {
+            Maior = Armario[T][M];
+            posicao = T;
+            posicao2 = M;
+        }
+    }
+}
+document.write('O modelo com <b>maior</b> quantidade de peças no tamanho '+Tamanho[posicao]+' é o modelo '+Modelo[posicao2]+' com '+Maior+' quantidade(s) de peças.'+'<hr>');
+</script>
