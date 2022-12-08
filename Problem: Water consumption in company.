@@ -1,0 +1,72 @@
+Uma empresa realiza o registro do consumo de água em todos os dias e em todos os 
+turnos da semana. Faça um programa que crie uma matriz com todos esses registros 
+de uma única semana e: <br>
+- Verifique qual dia tem o menor consumo de água. <br>
+- Verifique qual turno tem o maior consumo de água. <br>
+
+<hr><br>
+<meta charset = 'UTF-8'>
+
+<script>
+var Turnos = ["Manhã", "Tarde", "Noite"];
+var DiasDaSemana = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
+var acumulador;
+var posicao;
+var ConsumoAgua = Array (3);
+var D,T;
+for (T = 0; T < 3; T++) {
+    ConsumoAgua[T] = Array (7);
+    for (D = 0; D < 7; D++) {
+        ConsumoAgua[T][D] = parseInt(Math.random()*50);
+    }
+}
+
+for (T = 0; T < 3; T++) {
+    for (D = 0; D < 7; D++) {
+        document.write(ConsumoAgua[T][D]+' &nbsp&nbsp ');
+    }
+    document.write('<br><br>');
+}
+
+
+var DiaConsumo = Array (7);
+for (D = 0; D < 7; D++) {
+    acumulador = 0;
+    for (T = 0; T < 3; T++) {
+        acumulador += ConsumoAgua[T][D];
+    }
+    DiaConsumo[D] = acumulador;
+    document.write('O consumo de '+DiasDaSemana[D]+' é '+DiaConsumo[D]+' L'+'<br>');
+}
+document.write('<hr>');
+
+var Menor = DiaConsumo[0];
+for (D = 0; D < 7; D++) {
+    if (Menor > DiaConsumo[D]) {
+        Menor = DiaConsumo[D]
+        posicao = D;
+    }
+}
+document.write('O dia que tem o menor consumo de água é '+DiasDaSemana[posicao]+' com '+Menor+' L de água'+'<br><hr>');
+
+var TurnoConsumo = Array (3);
+for (T = 0; T < 3; T++) {
+    acumulador = 0;
+    for (D = 0; D < 7; D++) {
+        acumulador += ConsumoAgua[T][D];
+    }
+    TurnoConsumo[T] = acumulador;
+    document.write('O consumo de '+Turnos[T]+' é '+TurnoConsumo[T]+' L de água'+'<br>');
+}
+
+var Maior = TurnoConsumo[0];
+posicao = 0;
+for (T = 0; T < 3; T++) {
+    if (Maior < TurnoConsumo[T]) {
+        Maior = TurnoConsumo[T];
+        posicao = T;
+    }
+}
+document.write('<hr>');
+document.write('O turno que tem maior consumo de água é de '+Turnos[posicao]+' com '+Maior+' L de água'+'<br><hr>');
+</script>
